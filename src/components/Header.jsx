@@ -1,17 +1,15 @@
 import React from "react";
-import Timer from "./Timer";
 import { AppBar, Toolbar, Typography } from "@mui/material";
+import Timer from "./Timer";
 
-const Header = () => {
-  const hoursMinSecs = { hours: 1, minutes: 20, seconds: 40 };
-
+const Header = (props) => {
   return (
     <AppBar position="fixed">
       <Toolbar>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Exam
+          {props.user.name}
         </Typography>
-        <Timer hoursMinSecs={hoursMinSecs} />
+        <Timer {...props} />
       </Toolbar>
     </AppBar>
   );

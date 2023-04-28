@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   exam: "",
   answer: [],
+  time: "",
+  user: {},
 };
 
 export const dataSlice = createSlice({
@@ -15,10 +17,22 @@ export const dataSlice = createSlice({
     setAnswer: (state, action) => {
       state.answer = action.payload;
     },
+    setTime: (state, action) => {
+      state.time = action.payload;
+    },
+    setUser: (state, action) => {
+      state.user = action.payload;
+    },
+    clearData: (state, action) => {
+      state.answer = [];
+      state.time = "";
+      state.user = {};
+      state.exam = "";
+    },
   },
 });
 
-// Action creators are generated for each case reducer function
-export const { getData, setAnswer } = dataSlice.actions;
+export const { getData, setAnswer, setTime, setUser, clearData } =
+  dataSlice.actions;
 
 export default dataSlice.reducer;

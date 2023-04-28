@@ -1,15 +1,22 @@
 import { Box, Button, Typography } from "@mui/material";
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Options from "./Options";
-import { data } from "./data";
 import { useSelector } from "react-redux";
 
-const Question = () => {
+const Question = ({ setSubmit }) => {
   let { id = 0 } = useParams();
+  const navigate = useNavigate();
   const data = useSelector((state) => state.exam[0]);
   let question = data?.questions.find((item, index) => index == id);
 
+  const handlePrevious = () => {
+    navigate(`/question/${parseInt(id) - 1}`);
+  };
+
+  const handleNext = () => {
+    navigate(`/question/${parseInt(id) + 1}`);
+  };
   return (
     <>
       <Box
@@ -22,7 +29,7 @@ const Question = () => {
         }}
       >
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          {id + ". " + question.question}
+          {parseInt(id) + 1 + ". " + question.question}
         </Typography>
       </Box>
       <Options question={question} idindex={id.toString()} />
@@ -34,12 +41,20 @@ const Question = () => {
           justifyContent: "space-evenly",
         }}
       >
-        {id !== 0 && <Button variant="contained">Previous</Button>}
-        {data.questions.length !== id && (
-          <Button variant="contained">Next</Button>
+        {id !== "0" && (
+          <Button variant="contained" onClick={handlePrevious}>
+            Previous
+          </Button>
         )}
-        {data.questions.length - 1 === id && (
-          <Button variant="contained">Submit</Button>
+        {data.questions.length - 1 !== parseInt(id) && (
+          <Button variant="contained" onClick={handleNext}>
+            Next
+          </Button>
+        )}
+        {data.questions.length - 1 === parseInt(id) && (
+          <Button variant="contained" onClick={() => setSubmit(true)}>
+            Submit
+          </Button>
         )}
       </Box>
     </>
