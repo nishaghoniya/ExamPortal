@@ -1,4 +1,5 @@
 # ExamPortal
+
 Step to run this project :
 
 For Client :
@@ -9,4 +10,3 @@ For Server:
  1. cd .\server\  
  2. npm install
  3. npm start
- 
