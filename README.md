@@ -8,5 +8,6 @@ For Client :
 
 For Server:
  1. cd .\server\  
- 2. npm install
- 3. npm start
+ 2. Add mongodb database url as DATABASE_URL to .env file 
+ 3. npm install
+ 4. npm start
